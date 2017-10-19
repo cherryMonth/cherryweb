@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "index.html" %}
+    {%block title%}页面找不到了!{% endblock %}
+
+{% black content %}
+<div>
+    <div style="margin-left:30%">
+    <img src="/static/img/error.gif"  style="margin-top:100px;" alt="页面找不到了。">
+    <h1 style="color:black;margin-top:50px;margin-right:500px;">页面找不到了!联系管理员GG吧。</h1>
+</div>
+</div>
+{% endblock %}

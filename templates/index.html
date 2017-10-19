@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-songjian{{user_agent}}
-</body>
-</html>
+{% extends "bootstrap/base.html" %}
+{% block head %}
+{{super()}} <!-- 此处引用了flask的css文件 -->
+<link rel="shortcut icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon">
+<link rel="icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon">
+{% endblock %}
+{% block title%}我的个人网站!{% endblock %}
+
+{% block scripts %}
+{{super()}} <!-- 此处引用flask自带的js库 -->
+{{moment.include_moment()}}
+{% endblock %}
+
+{%block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" style="color:white">首页</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" style="color:white">
+                <li><a href="/" style="color:white">Home</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div style="margin-left:80%;">
+    <a><strong style="color:black;font-size:15px;">当地时间是:{{moment(current_time).format('LLL')}}</strong></a>
+</div>
+<div class="container">
+    <div class="page-header">
+        <h1 style="text-align:center">欢迎来到我的个人网站!</h1>
+    </div>
+
+</div>
+{% endblock %}

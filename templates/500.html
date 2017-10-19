@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "index.html" %}
+    {%block title%}页面找不到了!{% endblock %}
+
+{% block content %}
+<div style="text-align:center">
+    <img src="/static/img/null.jpg"  style="margin-top:50px;width:30%;" alt="页面打不开了。">
+    <h1 style="color:#C0C0C0;margin-top:50px;">页面打不开了,服务器出现问题!联系管理员GG吧。</h1>
+</div>
+{% endblock %}
