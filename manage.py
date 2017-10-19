@@ -1,5 +1,5 @@
 # coding=utf-8
-from flask import request, Flask, render_template
+from flask import request, Flask, render_template, session, redirect, url_for, flash
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.options import define, options
@@ -7,14 +7,19 @@ from tornado.ioloop import IOLoop
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.moment import Moment
 import datetime
-from flask.ext.wtf import Form
+from flask.ext.wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'hard to guess string'
 bootstrap = Bootstrap(app)  # 用bootstrap初始化app
 moment = Moment(app)  # 用Moment初始化app 获取本地时间
+
+
+class NameForm(FlaskForm):
+    name = StringField("what is your name!", validators=[Required()])
+    submit = SubmitField("Submit")
 
 
 @app.errorhandler(404)
@@ -27,10 +32,16 @@ def internal_server_error(e):
     return render_template("500.html"), 500
 
 
-@app.route("/")
-@app.route("/index")
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    return render_template("index.html", current_time=datetime.datetime.utcnow())
+    form = NameForm()
+    if form.validate_on_submit():
+        old = session.get('name')
+        if old is not None and old != form.name.data:
+            flash('look like  you have changed your name!')
+        session['name'] = form.name.data
+        return redirect(url_for('index'))
+    return render_template("index.html", current_time=datetime.datetime.utcnow(), form=form, name=session.get('name'))
 
 
 define("port", default=1234, type=int)
