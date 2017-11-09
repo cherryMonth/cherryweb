@@ -43,6 +43,9 @@ def index():
         return redirect(url_for('index'))
     return render_template("index.html", current_time=datetime.datetime.utcnow(), form=form, name=session.get('name'))
 
+@app.route("/love")
+def love():
+    return render_template("love.html")
 
 define("port", default=1234, type=int)
 

@@ -1,0 +1,7 @@
+http://127.0.0.1:1234
+Traceback (most recent call last):
+  File "manage.py", line 56, in <module>
+    IOLoop.instance().start()
+  File "/usr/lib64/python2.7/site-packages/tornado/ioloop.py", line 863, in start
+    event_pairs = self._impl.poll(poll_timeout)
+KeyboardInterrupt
