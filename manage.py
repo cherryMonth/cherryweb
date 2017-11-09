@@ -10,6 +10,7 @@ import datetime
 from flask.ext.wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import Required
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
@@ -50,6 +51,10 @@ def love():
 define("port", default=1234, type=int)
 
 if __name__ == '__main__':
+    pid = os.getpid()
+    filename = open("/root/cherryweb/pid.txt","w")
+    filename.write(str(pid))
+    filename.close()
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(options.port)  # flask默认的端口
     print 'http://127.0.0.1:%d' % options.port
