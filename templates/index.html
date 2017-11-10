@@ -1,76 +1,145 @@
-{% extends "bootstrap/base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% block head %}
-{{super()}} <!-- 此处引用了flask的css文件 -->
+{% block doc %}
+<!DOCTYPE html>
+<html>
+{% block html %}
+<head>
+	{% block head %}
+	<title>{%block title %}Welcome to my personal website!{% endblock %}</title>
+{% block metas %}
+	<meta name="description" content="La casa free real state fully responsive html5/css3 home page website template"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	{% endblock metas %}
 <link rel="shortcut icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon">
-<link rel="icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon">
-{% endblock %}
-{% block title%}我的个人网站!{% endblock %}
-
-{% block scripts %}
-{{super()}} <!-- 此处引用flask自带的js库 -->
-{{moment.include_moment()}}
-{% endblock %}
-
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/main.js"></script>
+{% endblock head %}
+</head>
+<body>
 {%block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/" style="color:white">首页</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav" style="color:white">
-                <li><a href="/" style="color:white">Home</a> </li>
-            </ul>
-            <ul class="nav navbar-nav" style="color:white">
-                <li><a href="/love" style="color:white">LOVE</a> </li>
-        </div>
-    </div>
-</div>
+<section class="hero">
+		<header>
+			<div class="wrapper">
+				<a href="#"><img src="/static/img/logo.png" class="logo" alt="" titl=""/></a>
+				<a href="#" class="hamburger"></a>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/love">Love</a></li>
+						<li><a href={{url_for('static',filename='birthday.html')}}>Happy Birthday</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+					<a href="#" class="login_btn">Login</a>
+				</nav>
+			</div>
+		</header><!--  end header section  -->
 
-{% endblock %}
+			<section class="caption">
+				<h2 class="caption">Find You Dream Home</h2>
+				<h3 class="properties">Appartements - Houses - Mansions</h3>
+			</section>
+	</section><!--  end hero section  -->
+	<section class="search">
+		<div class="wrapper">
+			<form action="#" method="post">
+				<input type="text" id="search" name="search" placeholder="What are you looking for?"  autocomplete="off"/>
+				<input type="submit" id="submit_search" name="submit_search"/>
+			</form>
+			<a href="#" class="advanced_search_icon" id="advanced_search_btn"></a>
+		</div>
+
+		<div class="advanced_search">
+			<div class="wrapper">
+				<span class="arrow"></span>
+				<form action="#" method="post">
+					<div class="search_fields">
+						<input type="text" class="float" id="check_in_date" name="check_in_date" placeholder="Check In Date"  autocomplete="off">
+
+						<hr class="field_sep float"/>
+
+						<input type="text" class="float" id="check_out_date" name="check_out_date" placeholder="Check Out Date"  autocomplete="off">
+					</div>
+					<div class="search_fields">
+						<input type="text" class="float" id="min_price" name="min_price" placeholder="Min. Price"  autocomplete="off">
+
+						<hr class="field_sep float"/>
+
+						<input type="text" class="float" id="max_price" name="max_price" placeholder="Max. price"  autocomplete="off">
+					</div>
+					<input type="text" id="keywords" name="keywords" placeholder="Keywords"  autocomplete="off">
+					<input type="submit" id="submit_search" name="submit_search"/>
+				</form>
+			</div>
+		</div><!--  end advanced search section  -->
+	</section><!--  end search section  -->
+{% endblock navbar %}
+
+{% block search %}
+
+{% endblock search %}
 
 {% block content %}
-{% block xiantiao %}
-<div style="float:right;" id="github_iframe"></div>
-<script type="text/javascript" color=black opacity='0.7' zIndex="-2" count="200" src="/static/canvas-nest.js"></script>
-<script type="text/javascript">
-    function async_load() {
-        //async load github
-        var i = document.createElement("iframe");
-        i.scrolling = "no";
-        i.frameborder = "0";
-        i.border = "0";
-        i.setAttribute("frameborder", "0", 0);
-        i.width = "100px";
-        i.height = "20px";
-        document.getElementById("gitframe").appendChild(i);
-    }
+{% endblock content %}
 
-    if (window.addEventListener){window.addEventListener("LOAD", async_load, false);}
-    else if (window.attachEvent) {window.attachEvent("ONLOAD", async_load);}
-    else {window.onload = async_load;}
-</script>
-{% endblock %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-                            <div class="alert alert-success">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-    <div class="page-header">
-        <h1 style="text-align:center">{{ name if name else "Hello" }},欢迎来到我的个人网站!</h1>
-    </div>
-    <div style="text-align:center;margin-top:100px;">
-        {{wtf.quick_form(form)}}
-    </div>
-</div>
-{% endblock %}
+{% block footer %}
+<footer>
+		<audio id="music" autoplay loop >
+  <source src="/static/背景音乐.mp3" type="audio/mp3">
+	</audio>
+
+		<div class="wrapper footer">
+			<ul>
+				<li class="links">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Policy</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Appartements</a></li>
+						<li><a href="#">Houses</a></li>
+						<li><a href="#">Villas</a></li>
+						<li><a href="#">Mansions</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">New York</a></li>
+						<li><a href="#">Los Anglos</a></li>
+						<li><a href="#">Miami</a></li>
+						<li><a href="#">Washington</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="about">
+					<p>La Casa is real estate minimal html5 website template, designed and coded by pixelhint, tellus varius, dictum erat vel, maximus tellus. Sed vitae auctor ipsum</p>
+					<ul>
+						<li><a href="http://facebook.com/pixelhint" class="facebook" target="_blank"></a></li>
+						<li><a href="http://twitter.com/pixelhint" class="twitter" target="_blank"></a></li>
+						<li><a href="http://plus.google.com/+Pixelhint" class="google" target="_blank"></a></li>
+						<li><a href="#" class="skype"></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="copyrights wrapper">
+			Copyright © 2015 <a href="http://pixelhint.com" target="_blank" class="ph_link" title="Download more free Templates">Pixelhint.com</a>. All Rights Reserved.
+		</div>
+	</footer><!--  end footer  -->
+{% endblock footer%}
+</body>
+{% endblock html %}
+</html>
+{% endblock doc %}

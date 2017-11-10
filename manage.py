@@ -33,6 +33,16 @@ def internal_server_error(e):
     return render_template("500.html"), 500
 
 
+@app.route("/love")
+def love():
+    return render_template("love.html")
+
+
+@app.route("/birthday")
+def birthday():
+    return render_template("birthday.html")
+
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
     form = NameForm()
@@ -44,17 +54,15 @@ def index():
         return redirect(url_for('index'))
     return render_template("index.html", current_time=datetime.datetime.utcnow(), form=form, name=session.get('name'))
 
-@app.route("/love")
-def love():
-    return render_template("love.html")
+
 
 define("port", default=1234, type=int)
 
 if __name__ == '__main__':
-    pid = os.getpid()
-    filename = open("/root/cherryweb/pid.txt","w")
-    filename.write(str(pid))
-    filename.close()
+    #pid = os.getpid()
+    #filename = open("/root/cherryweb/pid.txt","w")
+    #filename.write(str(pid))
+    #filename.close()
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(options.port)  # flask默认的端口
     print 'http://127.0.0.1:%d' % options.port
