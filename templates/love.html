@@ -1,4 +1,28 @@
 {% extends "index.html" %}
+
+{% block music %}
+	<audio id="music" controls autoplay loop >
+  <source src="/static/love.mp3" type="audio/mp3">
+	</audio>
+{% endblock music %}
+
+{% block navbar %}
+<header>
+			<div class="wrapper">
+				<a href="#" class="hamburger"></a>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/love">Love</a></li>
+						<li><a href={{url_for('static',filename='birthday.html')}}>Happy Birthday</a></li>
+						<li><a href="#">About</a></li>
+					</ul>
+					<a href="#" class="login_btn">Login</a>
+				</nav>
+			</div>
+		</header><!--  end header section  -->
+{% endblock navbar %}
+
 {% block head %}
 	{{super()}}
 	<title>Our Love Story</title>
@@ -112,4 +136,5 @@
     else if (window.attachEvent) {window.attachEvent("ONLOAD", async_load);}
     else {window.onload = async_load;}
 </script>
+<div style="margin-top:160px;"></div>
 {% endblock %}

@@ -58,11 +58,12 @@ def index():
 
 define("port", default=1234, type=int)
 
+
 if __name__ == '__main__':
     pid = os.getpid()
-    filename = open("/root/cherryweb/pid.txt","w")
-    filename.write(str(pid))
-    filename.close()
+    #filename = open("/root/cherryweb/pid.txt","w")
+    #filename.write(str(pid))
+    #filename.close()
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(options.port)  # flask默认的端口
     print 'http://127.0.0.1:%d' % options.port
