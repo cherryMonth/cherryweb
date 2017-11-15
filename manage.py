@@ -5,7 +5,7 @@ from tornado.httpserver import HTTPServer
 from tornado.options import define, options
 from tornado.ioloop import IOLoop
 from flask.ext.bootstrap import Bootstrap
-from flask.ext.moment import Moment
+#  from flask.ext.moment import Moment
 import datetime
 from flask.ext.wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -15,7 +15,7 @@ import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
 bootstrap = Bootstrap(app)  # 用bootstrap初始化app
-moment = Moment(app)  # 用Moment初始化app 获取本地时间
+# moment = Moment(app)  # 用Moment初始化app 获取本地时间
 
 
 class NameForm(FlaskForm):
