@@ -37,6 +37,10 @@ def internal_server_error(e):
 def love():
     return render_template("love.html")
 
+@app.route("/about")
+def love():
+    return render_template("about.html")
+
 
 @app.route("/birthday")
 def birthday():
