@@ -60,7 +60,7 @@ def index():
 
 
 
-define("port", default=1234, type=int)
+define("port", default=1314, type=int)
 
 
 if __name__ == '__main__':
