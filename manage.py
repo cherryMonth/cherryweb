@@ -38,7 +38,7 @@ def love():
     return render_template("love.html")
 
 @app.route("/about")
-def love():
+def about():
     return render_template("about.html")
 
 
